@@ -1,29 +1,23 @@
 pipeline {
-    agent any 
+    agent any
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('douniaharag')
+        DOCKERHUB_CREDENTIALS = credentials('douniaharag')
     }
-    stages { 
-
+    stages {
         stage('Build docker image') {
-            steps {  
-                sh 'docker build -t myapp/flask:$BUILD_NUMBER .'
+            steps {
+                sh 'docker build -t douniaharag/myapp:${BUILD_NUMBER} .'
             }
         }
-        stage('login to dockerhub') {
-            steps{
+        stage('Login to DockerHub') {
+            steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
-        stage('push image') {
-            steps{
-                sh 'docker push myapp/flask:$BUILD_NUMBER'
+        stage('Push image') {
+            steps {
+                sh 'docker push douniaharag/myapp:${BUILD_NUMBER}'
             }
-        }
-}
-post {
-        always {
-            sh 'docker logout'
         }
     }
 }

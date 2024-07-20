@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build docker image') {
             steps {
-                sh 'docker build -t dounia/flask:${BUILD_NUMBER} .'
+                sh 'docker build -t douniaharag/flaskapp:${BUILD_NUMBER} .'
             }
         }
         stage('Login to DockerHub') {
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Push image') {
             steps {
-                sh 'docker push dounia/flask:${BUILD_NUMBER}'
+                sh 'docker push douniaharag/flaskapp:${BUILD_NUMBER}'
             }
         }
     }

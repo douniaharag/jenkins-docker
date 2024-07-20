@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('douniaharag')
+        DOCKERHUB_CREDENTIALS = credentials('dounia-dockerhub')
     }
     stages {
         stage('Build docker image') {
